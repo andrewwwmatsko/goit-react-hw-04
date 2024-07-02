@@ -1,0 +1,33 @@
+.list {
+  max-width: 360px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    max-width: 768px;
+    padding: 8px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .list {
+    max-width: 1440px;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .list {
+    max-width: 2560px;
+    padding: 32px;
+  }
+}
+
+.item {
+  width: 300px;
+}
