@@ -8,17 +8,26 @@ import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const [photos, setPhotos] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(Date.now());
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const getImages = (query) => {
+    setPhotos([]);
+    setCurrentPage(1);
     setSearchQuery(query);
+  };
+
+  const handleLoadMore = () => {
+    setCurrentPage(currentPage + 1);
   };
 
   useEffect(() => {
@@ -28,10 +37,14 @@ export default function App() {
       try {
         setLoading(true);
         setError(false);
-        setPhotos([]);
 
-        const data = await fetchPhotos(searchQuery);
-        setPhotos(data);
+        const data = await fetchPhotos(searchQuery, currentPage);
+
+        setPhotos((prevPhotos) => {
+          return [...prevPhotos, ...data.results];
+        });
+
+        setTotalPages(data.total_pages);
       } catch (error) {
         setError(true);
       } finally {
@@ -39,7 +52,7 @@ export default function App() {
       }
     }
     fetchImg();
-  }, [searchQuery]);
+  }, [searchQuery, currentPage]);
 
   return (
     <div className={css.container}>
@@ -47,7 +60,10 @@ export default function App() {
       <main>
         {photos.length > 0 && <ImageGallery images={photos} />}
         {error && <ErrorMessage />}
-        {loading && <Loader loading={loading} />}
+        {loading && <Loader />}
+        {photos.length > 0 && !loading && currentPage < totalPages && (
+          <LoadMoreBtn onAddMore={handleLoadMore} />
+        )}
       </main>
     </div>
   );

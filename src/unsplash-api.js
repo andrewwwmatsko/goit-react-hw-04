@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function fetchPhotos(query) {
+export async function fetchPhotos(query, page) {
   const API_KEY = "RSuD8NjPnNPwk96VN3D55Gw9p6myIuy3DBNlEDRa_mc";
 
   axios.defaults.baseURL = "https://api.unsplash.com";
@@ -10,9 +10,10 @@ export async function fetchPhotos(query) {
     params: {
       query,
       per_page: 16,
+      page,
       orientation: "landscape",
     },
   });
 
-  return response.data.results;
+  return response.data;
 }
