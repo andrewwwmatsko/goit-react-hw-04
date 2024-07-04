@@ -7,7 +7,7 @@ import { RiCloseLargeFill, RiStarLine, RiStarFill } from "react-icons/ri";
 import { formatDate } from "../../helpers/formatDate";
 
 import css from "./ImageModal.module.css";
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 
 const notify = () => toast.success("Successfully toasted!");
 
