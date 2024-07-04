@@ -57,9 +57,9 @@ export default function ImageModal({
   };
 
   const handleAddToFav = () => {
-    notify();
     onAddToFav(imageData);
     if (!isAdded) {
+      notify();
       setButtonIcon(<RiStarFill size={28} color="darkblue" />);
       setIsAdded(true);
     } else {
