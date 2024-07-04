@@ -35,6 +35,9 @@ export default function SearchBar({ onSearch }) {
 
   return (
     <header className={css.header}>
+      <a href="./index.html" className={css.logo}>
+        Image<span className={css.colorLogo}>Gall</span>
+      </a>
       <form onSubmit={handleSubmit} className={css.form}>
         <div className={css.formContainer}>
           <input

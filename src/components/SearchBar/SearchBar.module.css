@@ -1,6 +1,18 @@
 .header {
   background-color: darkblue;
   padding: 10px 0;
+  position: relative;
+}
+
+.logo {
+  font-family: "Kanit", sans-serif;
+  font-size: 32px;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 15px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .form {
