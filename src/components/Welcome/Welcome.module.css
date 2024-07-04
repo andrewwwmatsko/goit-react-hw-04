@@ -1,0 +1,32 @@
+.container {
+  background-image: url("../../images/moon.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 97vh;
+}
+
+.text {
+  color: whitesmoke;
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  margin: 0 auto;
+  font-size: 52px;
+  max-width: 300px;
+  position: relative;
+  top: 25%;
+}
+
+@media screen and (min-width: 768px) {
+  .text {
+    font-size: 72px;
+    top: 30%;
+    max-width: 600px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .text {
+    font-size: 102px;
+    max-width: 780px;
+  }
+}

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Modal from "react-modal";
 
 import { fetchPhotos } from "../../unsplash-api";
 
@@ -11,6 +10,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
+import Welcome from "../Welcome/Welcome";
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -59,12 +59,11 @@ export default function App() {
     fetchImg();
   }, [searchQuery, currentPage]);
 
-  Modal.setAppElement("#root");
-
   return (
     <div className={css.container}>
       <SearchBar onSearch={getImages} />
       <main>
+        {!searchQuery && <Welcome />}
         {photos.length > 0 && (
           <ImageGallery
             openModal={setIsModalOpen}
@@ -74,9 +73,10 @@ export default function App() {
         )}
         {error && <ErrorMessage />}
         {loading && <Loader />}
-        {photos.length > 0 && !loading && currentPage < totalPages && (
-          <LoadMoreBtn onAddMore={handleLoadMore} />
-        )}
+        {photos.length > 0 &&
+          !loading &&
+          currentPage < totalPages &&
+          !error && <LoadMoreBtn onAddMore={handleLoadMore} />}
       </main>
 
       {isModalOpen && (
