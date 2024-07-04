@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Modal from "react-modal";
 
 import { fetchPhotos } from "../../unsplash-api";
 
@@ -9,6 +10,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../ImageModal/ImageModal";
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,6 +21,9 @@ export default function App() {
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
 
   const getImages = (query) => {
     setPhotos([]);
@@ -54,17 +59,33 @@ export default function App() {
     fetchImg();
   }, [searchQuery, currentPage]);
 
+  Modal.setAppElement("#root");
+
   return (
     <div className={css.container}>
       <SearchBar onSearch={getImages} />
       <main>
-        {photos.length > 0 && <ImageGallery images={photos} />}
+        {photos.length > 0 && (
+          <ImageGallery
+            openModal={setIsModalOpen}
+            onImageClick={setModalData}
+            images={photos}
+          />
+        )}
         {error && <ErrorMessage />}
         {loading && <Loader />}
         {photos.length > 0 && !loading && currentPage < totalPages && (
           <LoadMoreBtn onAddMore={handleLoadMore} />
         )}
       </main>
+
+      {isModalOpen && (
+        <ImageModal
+          isOpen={isModalOpen}
+          onSetModal={setIsModalOpen}
+          imageData={modalData}
+        />
+      )}
     </div>
   );
 }
