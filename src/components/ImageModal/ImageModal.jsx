@@ -1,15 +1,24 @@
 import Modal from "react-modal";
 
-import { RiCloseLargeFill } from "react-icons/ri";
+import toast, { Toaster } from "react-hot-toast";
+
+import { RiCloseLargeFill, RiStarLine, RiStarFill } from "react-icons/ri";
 
 import { formatDate } from "../../helpers/formatDate";
 
 import css from "./ImageModal.module.css";
+import { useState, useSyncExternalStore } from "react";
+
+const notify = () => toast.success("Successfully toasted!");
 
 export default function ImageModal({
   isOpen,
   onSetModal,
-  imageData: {
+  onAddToFav,
+  imageData,
+  removePhotoFromFav,
+}) {
+  const {
     created_at,
     description,
     urls,
@@ -18,8 +27,11 @@ export default function ImageModal({
     tags,
     user: { name, location },
     alt_description,
-  },
-}) {
+  } = imageData;
+
+  const [buttonIcon, setButtonIcon] = useState(<RiStarLine size={28} />);
+  const [isAdded, setIsAdded] = useState(false);
+
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.65)",
@@ -44,6 +56,18 @@ export default function ImageModal({
     document.body.classList.remove("ReactModal__Body--open");
   };
 
+  const handleAddToFav = () => {
+    notify();
+    onAddToFav(imageData);
+    if (!isAdded) {
+      setButtonIcon(<RiStarFill size={28} color="darkblue" />);
+      setIsAdded(true);
+    } else {
+      setButtonIcon(<RiStarLine size={28} />);
+      setIsAdded(false);
+    }
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -53,9 +77,16 @@ export default function ImageModal({
       preventScroll={true}
       onAfterClose={handleBodyClassRemove}
     >
-      <button className={css.btn} onClick={onCloseModal} type="button">
-        <RiCloseLargeFill size={28} />
-      </button>
+      <Toaster position="top-center" reverseOrder={false} />
+      <div className={css.btnGroup}>
+        <button type="button" className={css.favBtn} onClick={handleAddToFav}>
+          {buttonIcon}
+        </button>
+
+        <button className={css.btn} onClick={onCloseModal} type="button">
+          <RiCloseLargeFill size={28} />
+        </button>
+      </div>
 
       <img className={css.img} src={urls.regular} alt={alt_description} />
 

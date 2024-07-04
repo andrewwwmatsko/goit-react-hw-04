@@ -1,16 +1,15 @@
 .header {
   background-color: darkblue;
-  padding: 10px 0;
+  padding: 10px 72px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
 .logo {
   font-family: "Kanit", sans-serif;
   font-size: 32px;
   color: white;
-  position: absolute;
-  top: 0;
-  left: 15px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -23,7 +22,7 @@
 
 .search {
   width: 220px;
-  padding: 4px 30px 4px 8px;
+  padding: 8px 30px 8px 16px;
   border: none;
   border-radius: 4px;
   background-color: rgba(220, 220, 220, 0.377);
@@ -54,10 +53,22 @@
   border: none;
 
   position: absolute;
-  top: 1px;
-  right: 0;
+  top: 7px;
+  right: 16px;
 }
 
 .formContainer {
   position: relative;
+}
+
+.favBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }

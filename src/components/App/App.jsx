@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import toast, { Toaster } from "react-hot-toast";
+
 import { fetchPhotos } from "../../unsplash-api";
 
 import css from "./App.module.css";
@@ -11,6 +13,20 @@ import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
 import Welcome from "../Welcome/Welcome";
+
+const notify = () =>
+  toast.error("There are no photos yet.", {
+    duration: 2000,
+    style: {
+      border: "1px solid #713200",
+      padding: "16px",
+      color: "#713200",
+    },
+    iconTheme: {
+      primary: "#713200",
+      secondary: "#FFFAEE",
+    },
+  });
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,6 +41,9 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({});
 
+  const [favourites, setFavourites] = useState([]);
+  // const [photoIdToRemove, setPhotoIdToRemove] = useState(null);
+
   const getImages = (query) => {
     setPhotos([]);
     setCurrentPage(1);
@@ -33,6 +52,24 @@ export default function App() {
 
   const handleLoadMore = () => {
     setCurrentPage(currentPage + 1);
+  };
+
+  const handleAddToFav = (newFav) => {
+    setFavourites((prevFav) => {
+      return [...prevFav, newFav];
+    });
+  };
+
+  // const filteredPhotos = photos.filter((photo) => {
+  //   return photo.id !== photoIdToRemove;
+  // });
+
+  const handleShowFav = () => {
+    setPhotos(favourites);
+    if (photos.length === 0) {
+      notify();
+      return;
+    }
   };
 
   useEffect(() => {
@@ -61,7 +98,7 @@ export default function App() {
 
   return (
     <div className={css.container}>
-      <SearchBar onSearch={getImages} />
+      <SearchBar onSearch={getImages} onShowFav={handleShowFav} />
       <main>
         {!searchQuery && <Welcome />}
         {photos.length > 0 && (
@@ -84,6 +121,7 @@ export default function App() {
           isOpen={isModalOpen}
           onSetModal={setIsModalOpen}
           imageData={modalData}
+          onAddToFav={handleAddToFav}
         />
       )}
     </div>

@@ -1,6 +1,7 @@
 import toast, { Toaster } from "react-hot-toast";
 
 import { RiSearchLine } from "react-icons/ri";
+import { RiStarFill } from "react-icons/ri";
 
 import css from "./SearchBar.module.css";
 
@@ -18,7 +19,7 @@ const notify = () =>
     },
   });
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch, onShowFav }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const inputValue = e.target.elements.search.value.trim();
@@ -31,6 +32,10 @@ export default function SearchBar({ onSearch }) {
     onSearch(inputValue);
 
     e.target.reset();
+  };
+
+  const handleShowFav = () => {
+    onShowFav();
   };
 
   return (
@@ -53,6 +58,10 @@ export default function SearchBar({ onSearch }) {
           </button>
         </div>
       </form>
+      <button type="button" className={css.favBtn} onClick={handleShowFav}>
+        <RiStarFill size={28} color="white" />
+        Favourites
+      </button>
       <Toaster containerStyle={{ top: 50 }} reverseOrder={false} />
     </header>
   );
