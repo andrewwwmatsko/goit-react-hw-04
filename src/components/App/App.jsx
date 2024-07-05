@@ -33,7 +33,7 @@ export default function App() {
 
   const [photos, setPhotos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(Date.now());
+  const [totalPages, setTotalPages] = useState(0);
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -60,16 +60,17 @@ export default function App() {
     });
   };
 
-  // const filteredPhotos = photos.filter((photo) => {
-  //   return photo.id !== photoIdToRemove;
-  // });
-
   const handleShowFav = () => {
     setPhotos(favourites);
     if (photos.length === 0) {
       notify();
       return;
     }
+  };
+
+  const openModal = (image) => {
+    setModalData(image);
+    setIsModalOpen(true);
   };
 
   useEffect(() => {
@@ -102,11 +103,7 @@ export default function App() {
       <main>
         {!searchQuery && <Welcome />}
         {photos.length > 0 && (
-          <ImageGallery
-            openModal={setIsModalOpen}
-            onImageClick={setModalData}
-            images={photos}
-          />
+          <ImageGallery openModal={openModal} images={photos} />
         )}
         {error && <ErrorMessage />}
         {loading && <Loader />}

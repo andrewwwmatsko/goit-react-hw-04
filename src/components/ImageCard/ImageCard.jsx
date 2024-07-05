@@ -1,9 +1,8 @@
 import css from "./ImageCard.module.css";
 
-export default function ImageCard({ image, onImageClick, openModal }) {
+export default function ImageCard({ image, openModal }) {
   const handleClick = () => {
-    onImageClick(image);
-    openModal(true);
+    openModal(image);
   };
   return (
     <div className={css.container} onClick={handleClick}>
