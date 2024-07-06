@@ -40,28 +40,30 @@ export default function SearchBar({ onSearch, onShowFav }) {
 
   return (
     <header className={css.header}>
-      <a href="./index.html" className={css.logo}>
-        Image<span className={css.colorLogo}>Gall</span>
-      </a>
-      <form onSubmit={handleSubmit} className={css.form}>
-        <div className={css.formContainer}>
-          <input
-            className={css.search}
-            type="text"
-            name="search"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images..."
-          />
-          <button type="submit" className={css.btn}>
-            <RiSearchLine size={22} color="white" />
-          </button>
-        </div>
-      </form>
-      <button type="button" className={css.favBtn} onClick={handleShowFav}>
-        <RiStarFill size={28} color="white" />
-        Favourites
-      </button>
+      <div className={css.container}>
+        <a href="./index.html" className={css.logo}>
+          Image<span className={css.colorLogo}>Gall</span>
+        </a>
+        <form onSubmit={handleSubmit} className={css.form}>
+          <div className={css.formContainer}>
+            <input
+              className={css.search}
+              type="text"
+              name="search"
+              autoComplete="off"
+              autoFocus
+              placeholder="Search images..."
+            />
+            <button type="submit" className={css.btn}>
+              <RiSearchLine size={22} color="white" />
+            </button>
+          </div>
+        </form>
+        <button type="button" className={css.favBtn} onClick={handleShowFav}>
+          <RiStarFill size={28} color="white" />
+          Favourites
+        </button>
+      </div>
       <Toaster containerStyle={{ top: 50 }} reverseOrder={false} />
     </header>
   );
