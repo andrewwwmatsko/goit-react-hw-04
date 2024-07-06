@@ -3,7 +3,7 @@ import img from "../../images/9170816.jpg";
 
 export default function ErrorMessage() {
   return (
-    <div>
+    <div className={css.container}>
       <img
         className={css.errorImage}
         src={img}

@@ -1,9 +1,15 @@
+.container {
+  position: relative;
+}
+
 .errorImage {
   width: 500px;
   height: auto;
   position: absolute;
-  top: 10%;
-  right: 40%;
+  top: 50%;
+  left: 50%;
+
+  transform: translateX(-50%);
 }
 
 .text {
@@ -15,8 +21,10 @@
   font-size: 52px;
   max-width: 700px;
   position: absolute;
-  top: 600px;
-  left: 950px;
+  top: 450px;
+  left: 50%;
+
+  transform: translateX(-50%);
 }
 
 .smaller {
