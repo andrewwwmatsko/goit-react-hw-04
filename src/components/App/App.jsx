@@ -28,6 +28,8 @@ const notify = () =>
     },
   });
 
+const notifyWhenAddedToFav = () => toast.success("Successfully toasted!");
+
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -42,6 +44,7 @@ export default function App() {
   const [modalData, setModalData] = useState({});
 
   const [favourites, setFavourites] = useState([]);
+  const [isFavOpen, setIsFavOpen] = useState(false);
   // const [photoIdToRemove, setPhotoIdToRemove] = useState(null);
 
   const getImages = (query) => {
@@ -58,10 +61,12 @@ export default function App() {
     setFavourites((prevFav) => {
       return [...prevFav, newFav];
     });
+    notifyWhenAddedToFav();
   };
 
   const handleShowFav = () => {
     setPhotos(favourites);
+    setIsFavOpen(true);
     if (photos.length === 0) {
       notify();
       return;
@@ -110,7 +115,8 @@ export default function App() {
         {photos.length > 0 &&
           !loading &&
           currentPage < totalPages &&
-          !error && <LoadMoreBtn onAddMore={handleLoadMore} />}
+          !error &&
+          !isFavOpen && <LoadMoreBtn onAddMore={handleLoadMore} />}
       </main>
 
       {isModalOpen && (

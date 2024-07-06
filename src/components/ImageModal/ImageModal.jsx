@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 import { RiCloseLargeFill, RiStarLine, RiStarFill } from "react-icons/ri";
 
@@ -8,8 +8,6 @@ import { formatDate } from "../../helpers/formatDate";
 
 import css from "./ImageModal.module.css";
 import { useState } from "react";
-
-const notify = () => toast.success("Successfully toasted!");
 
 export default function ImageModal({
   isOpen,
@@ -59,7 +57,6 @@ export default function ImageModal({
   const handleAddToFav = () => {
     onAddToFav(imageData);
     if (!isAdded) {
-      notify();
       setButtonIcon(<RiStarFill size={28} color="darkblue" />);
       setIsAdded(true);
     } else {
