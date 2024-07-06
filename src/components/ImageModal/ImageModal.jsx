@@ -44,7 +44,7 @@ export default function ImageModal({
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#F0F0F0",
-      maxWidth: "1120px",
+      width: "100vh",
     },
   };
 
