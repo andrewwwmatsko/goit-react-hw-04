@@ -42,7 +42,7 @@ export default function ImageModal({
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#F0F0F0",
-      width: "100vh",
+      width: "50vw",
     },
   };
 
