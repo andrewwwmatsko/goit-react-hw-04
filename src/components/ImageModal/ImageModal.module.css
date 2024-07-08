@@ -1,3 +1,18 @@
+.modal {
+  position: fixed;
+  top: "50%";
+  left: "50%";
+  right: "auto";
+  bottom: "auto";
+  transform: "translate(-50%, -50%)";
+  background-color: "#F0F0F0";
+  width: 80vw;
+  /* height: 80vh; */
+}
+.content {
+  padding: 16px;
+}
+
 .btnGroup {
   margin-bottom: 5px;
   display: flex;
