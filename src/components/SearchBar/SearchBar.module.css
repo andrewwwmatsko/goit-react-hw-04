@@ -2,7 +2,6 @@
   background-color: darkblue;
   padding: 10px 0;
   position: relative;
-  margin-bottom: 20px;
 }
 
 .container {
@@ -36,6 +35,12 @@
   color: white;
   transition: background-color 250ms ease-in-out;
   font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    padding-left: 10px;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -75,6 +80,12 @@
   right: 16px;
 }
 
+@media screen and (max-width: 768px) {
+  .btn {
+    right: 0;
+  }
+}
+
 .formContainer {
   position: relative;
 }
@@ -89,4 +100,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .favBtn {
+    display: none;
+  }
 }

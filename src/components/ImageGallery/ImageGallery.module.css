@@ -8,6 +8,7 @@
   flex-wrap: wrap;
   column-gap: 20px;
   column-count: 3;
+  margin-top: 20px;
 }
 
 @media screen and (min-width: 768px) {
