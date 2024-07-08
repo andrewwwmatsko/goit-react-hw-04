@@ -27,7 +27,6 @@ export default function ImageModal({
     alt_description,
   } = imageData;
 
-  const [buttonIcon, setButtonIcon] = useState(<RiStarLine size={28} />);
   const [isAdded, setIsAdded] = useState(false);
 
   const customStyles = {
@@ -55,14 +54,13 @@ export default function ImageModal({
   };
 
   const handleAddToFav = () => {
-    onAddToFav(imageData);
-    if (!isAdded) {
-      setButtonIcon(<RiStarFill size={28} color="darkblue" />);
-      setIsAdded(true);
-    } else {
-      setButtonIcon(<RiStarLine size={28} />);
+    if (isAdded) {
       setIsAdded(false);
+      //logic for removal
+      return;
     }
+    onAddToFav(imageData);
+    setIsAdded(true);
   };
 
   return (
@@ -76,7 +74,11 @@ export default function ImageModal({
     >
       <div className={css.btnGroup}>
         <button type="button" className={css.favBtn} onClick={handleAddToFav}>
-          {buttonIcon}
+          {isAdded ? (
+            <RiStarFill size={28} color="darkblue" />
+          ) : (
+            <RiStarLine size={28} />
+          )}
         </button>
 
         <button className={css.btn} onClick={onCloseModal} type="button">
