@@ -74,7 +74,6 @@ export default function ImageModal({
       preventScroll={true}
       onAfterClose={handleBodyClassRemove}
     >
-      <Toaster position="top-center" reverseOrder={false} />
       <div className={css.btnGroup}>
         <button type="button" className={css.favBtn} onClick={handleAddToFav}>
           {buttonIcon}
