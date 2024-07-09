@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 import { fetchPhotos } from "../../unsplash-api";
 
@@ -127,6 +127,7 @@ export default function App() {
           onAddToFav={handleAddToFav}
         />
       )}
+      <Toaster containerStyle={{ top: 50 }} reverseOrder={false} />
     </div>
   );
 }

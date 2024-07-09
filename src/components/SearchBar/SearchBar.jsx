@@ -64,7 +64,6 @@ export default function SearchBar({ onSearch, onShowFav }) {
           Favourites
         </button>
       </div>
-      <Toaster containerStyle={{ top: 50 }} reverseOrder={false} />
     </header>
   );
 }
